@@ -53,5 +53,7 @@ int main() {
     }
     std::cout << std::endl << "Cost: " << result_f.cost << std::endl;
 
+    dataset.close();
+
     return 0;
 }
