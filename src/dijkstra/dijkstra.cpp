@@ -46,10 +46,6 @@ t_distance_1d dijkstra(std::vector<std::vector<long int>> graph, const int src, 
                 }
             }
         }
-
-        if (minimum_node == trg) {
-            break;
-        }
     }
 
     auto stop = std::chrono::high_resolution_clock::now();
