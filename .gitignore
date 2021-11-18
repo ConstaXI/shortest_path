@@ -33,3 +33,6 @@
 
 # Build
 cmake-build-debug
+
+# JetBrains
+.idea

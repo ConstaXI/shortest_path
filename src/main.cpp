@@ -6,7 +6,7 @@
 #include "floyd_warshall/floyd_warshall.h"
 
 int main() {
-    std::string file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rome99c.txt)";
+    std::string file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rg300_4730.txt)";
 
     std::ifstream dataset(file_path);
 
