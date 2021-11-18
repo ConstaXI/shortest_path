@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "dijkstra.h"
 
-t_distance dijkstra(std::vector<std::vector<long int>> graph, const int src, const int trg) {
+t_distance_1d dijkstra(std::vector<std::vector<long int>> graph, const int src, const int trg) {
     auto start = std::chrono::high_resolution_clock::now();
 
     const long int vertex = graph[0][0];
@@ -16,8 +16,6 @@ t_distance dijkstra(std::vector<std::vector<long int>> graph, const int src, con
     std::vector<long int> distance(vertex);
     std::vector<long int> nodes(vertex);
     std::vector<long int> prev(vertex);
-    std::vector<long int> path;
-    long int cost = 0;
 
     for (int i = 0; i < vertex; i++) {
         distance[i] = INT_MAX;
@@ -49,9 +47,6 @@ t_distance dijkstra(std::vector<std::vector<long int>> graph, const int src, con
             }
         }
 
-        path.push_back(minimum_node);
-        cost += distance[minimum_node];
-
         if (minimum_node == trg) {
             break;
         }
@@ -61,5 +56,5 @@ t_distance dijkstra(std::vector<std::vector<long int>> graph, const int src, con
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
-    return {.distance = distance, .prev = prev, .path = path, .cost = cost, .ms = duration};
+    return {.distance = distance, .prev = prev, .path = get_path(prev, src, trg), .cost = distance[trg], .ms = duration};
 }

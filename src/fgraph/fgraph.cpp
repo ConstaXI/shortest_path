@@ -2,6 +2,7 @@
 // Created by DaviB on 16/11/2021.
 //
 
+#include <algorithm>
 #include "fgraph.h"
 
 std::vector<long int> get_vertices_and_edges(std::ifstream &dataset) {
@@ -37,4 +38,21 @@ std::vector<std::vector<long int>> get_adjacency_list_graph(std::ifstream &datas
     }
 
     return graph;
+}
+
+std::vector<long int> get_path(std::vector<long int> prev, const long int src, const long int trg) {
+    std::vector<long int> path;
+
+    path.push_back(trg);
+
+    long int temp = trg;
+
+    while (temp != src) {
+        temp = prev[temp];
+        path.push_back(temp);
+    }
+
+    std::reverse(path.begin(), path.end());
+
+    return path;
 }

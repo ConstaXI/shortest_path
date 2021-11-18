@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
-project(grafos)
+project(shortest_path)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(grafos src/main.cpp src/fgraph/fgraph.cpp src/fgraph/fgraph.h src/dijkstra/dijkstra.cpp src/dijkstra/dijkstra.h src/bellmanford/bellmanford.cpp src/bellmanford/bellmanford.h)
+add_executable(shortest_path src/main.cpp src/fgraph/fgraph.cpp src/fgraph/fgraph.h src/dijkstra/dijkstra.cpp src/dijkstra/dijkstra.h src/bellman_ford/bellman_ford.cpp src/bellman_ford/bellman_ford.h src/floyd_warshall/floyd_warshall.cpp src/floyd_warshall/floyd_warshall.h)
