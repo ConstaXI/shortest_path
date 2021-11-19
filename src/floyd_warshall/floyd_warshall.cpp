@@ -27,6 +27,7 @@ t_distance_2d floyd_warshall(std::vector<std::vector<long int>> graph, const int
 
     std::vector<std::vector<long int>> distance(vertex, std::vector<long int> (vertex, INT_MAX));
     std::vector<std::vector<long int>> next(vertex, std::vector<long int> (vertex, INT_MAX));
+    long int iterations = 0;
 
     for (auto & i : graph) {
         distance[i[0]][i[1]] = i[2];
@@ -38,8 +39,6 @@ t_distance_2d floyd_warshall(std::vector<std::vector<long int>> graph, const int
         next[i][i] = i;
     }
 
-    long long int iterations = 0;
-
     for (int k = 0; k < vertex; k++) {
         for (int i = 0; i < vertex; i++) {
             for (int j = 0; j < vertex; j++) {
@@ -47,6 +46,8 @@ t_distance_2d floyd_warshall(std::vector<std::vector<long int>> graph, const int
                     distance[i][j] = distance[i][k] + distance[k][j];
                     next[i][j] = next[i][k];
                 }
+
+                iterations++;
             }
         }
     }
@@ -57,5 +58,5 @@ t_distance_2d floyd_warshall(std::vector<std::vector<long int>> graph, const int
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
-    return {.distance = distance, .next = next, .path = path, .cost = distance[src][trg], .ms = duration};
+    return {.distance = distance, .next = next, .path = path, .cost = distance[src][trg], .ms = duration, .iterations = iterations};
 }

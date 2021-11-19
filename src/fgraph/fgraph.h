@@ -17,6 +17,7 @@ typedef struct minimum_distance_1d {
     std::vector<long int> path;
     long int cost;
     std::chrono::milliseconds ms;
+    long int iterations;
 } t_distance_1d;
 
 typedef struct minimum_distance_2d {
@@ -25,6 +26,7 @@ typedef struct minimum_distance_2d {
     std::vector<long int> path;
     long int cost;
     std::chrono::milliseconds ms;
+    long int iterations;
 } t_distance_2d;
 
 /* Get the vertices and edges as an array of size 2

@@ -2,7 +2,6 @@
 // Created by DaviB on 16/11/2021.
 //
 
-#include <algorithm>
 #include "dijkstra.h"
 
 t_distance_1d dijkstra(std::vector<std::vector<long int>> graph, const int src, const int trg) {
@@ -16,6 +15,7 @@ t_distance_1d dijkstra(std::vector<std::vector<long int>> graph, const int src, 
     std::vector<long int> distance(vertex);
     std::vector<long int> nodes(vertex);
     std::vector<long int> prev(vertex);
+    long int iterations = 0;
 
     for (int i = 0; i < vertex; i++) {
         distance[i] = INT_MAX;
@@ -24,6 +24,7 @@ t_distance_1d dijkstra(std::vector<std::vector<long int>> graph, const int src, 
     }
 
     distance[src] = 0;
+    int neighbor, weight;
 
     while (!nodes.empty()) {
         int minimum_node = nodes[0];
@@ -38,13 +39,21 @@ t_distance_1d dijkstra(std::vector<std::vector<long int>> graph, const int src, 
 
         for (int i = 0; i < edges; i++) {
             if (graph[i][0] == minimum_node) {
-                long int alt = distance[minimum_node] + graph[i][2];
-                if (distance[graph[i][1]] > alt) {
-                    distance[graph[i][1]] = alt;
+                neighbor = graph[i][1];
+                weight = graph[i][2];
 
-                    prev[graph[i][1]] = minimum_node;
+                if (distance[neighbor] > distance[minimum_node] + weight) {
+                    distance[neighbor] = distance[minimum_node] + weight;
+
+                    prev[neighbor] = minimum_node;
                 }
             }
+
+            iterations++;
+        }
+
+        if (minimum_node == trg) {
+            break;
         }
     }
 
@@ -52,5 +61,5 @@ t_distance_1d dijkstra(std::vector<std::vector<long int>> graph, const int src, 
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
-    return {.distance = distance, .prev = prev, .path = get_path(prev, src, trg), .cost = distance[trg], .ms = duration};
+    return {.distance = distance, .prev = prev, .path = get_path(prev, src, trg), .cost = distance[trg], .ms = duration, .iterations = iterations};
 }

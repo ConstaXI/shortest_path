@@ -8,6 +8,8 @@
 #include <vector>
 #include <climits>
 #include <numeric>
+#include <algorithm>
+#include <queue>
 #include "../fgraph/fgraph.h"
 
 t_distance_1d dijkstra(std::vector<std::vector<long int>>, int, int);
