@@ -4,12 +4,12 @@
 
 #include "floyd_warshall.h"
 
-std::vector<long int> get_path(std::vector<std::vector<long int>> next, int src, int trg) {
-    std::vector<long int> path;
+std::vector<int> get_path(std::vector<std::vector<int>> next, int src, int trg) {
+    std::vector<int> path;
 
     path.push_back(src);
 
-    while(src != trg) {
+    while (src != trg) {
         src = next[src][trg];
         path.push_back(src);
     }
@@ -17,19 +17,19 @@ std::vector<long int> get_path(std::vector<std::vector<long int>> next, int src,
     return path;
 }
 
-t_distance_2d floyd_warshall(std::vector<std::vector<long int>> graph, const int src, const int trg) {
+t_distance_2d floyd_warshall(std::vector<std::vector<int>> graph, const int src, const int trg) {
     auto start = std::chrono::high_resolution_clock::now();
 
-    const long int vertex = graph[0][0];
-    const long int edges = graph[0][1];
+    const int vertex = graph[0][0];
+    const int edges = graph[0][1];
 
     graph.erase(graph.begin());
 
-    std::vector<std::vector<long int>> distance(vertex, std::vector<long int> (vertex, INT_MAX));
-    std::vector<std::vector<long int>> next(vertex, std::vector<long int> (vertex, INT_MAX));
-    long int iterations = 0;
+    std::vector<std::vector<int>> distance(vertex, std::vector<int>(vertex, INT_MAX));
+    std::vector<std::vector<int>> next(vertex, std::vector<int>(vertex, INT_MAX));
+    int iterations = 0;
 
-    for (auto & i : graph) {
+    for (auto &i : graph) {
         distance[i[0]][i[1]] = i[2];
         next[i[0]][i[1]] = i[1];
     }
@@ -42,7 +42,8 @@ t_distance_2d floyd_warshall(std::vector<std::vector<long int>> graph, const int
     for (int k = 0; k < vertex; k++) {
         for (int i = 0; i < vertex; i++) {
             for (int j = 0; j < vertex; j++) {
-                if (distance[i][j] > distance[i][k] + distance[k][j] && (distance[k][j] != INT_MAX && distance[i][k] != INT_MAX)) {
+                if (distance[i][j] > distance[i][k] + distance[k][j] &&
+                    (distance[k][j] != INT_MAX && distance[i][k] != INT_MAX)) {
                     distance[i][j] = distance[i][k] + distance[k][j];
                     next[i][j] = next[i][k];
                 }
@@ -52,7 +53,7 @@ t_distance_2d floyd_warshall(std::vector<std::vector<long int>> graph, const int
         }
     }
 
-    std::vector<long int> path = get_path(next, src, trg);
+    std::vector<int> path = get_path(next, src, trg);
 
     auto stop = std::chrono::high_resolution_clock::now();
 

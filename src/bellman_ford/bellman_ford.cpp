@@ -5,18 +5,18 @@
 #include <algorithm>
 #include "bellman_ford.h"
 
-t_distance_1d bellmanford(std::vector<std::vector<long int>> graph, const int src, const int trg) {
+t_distance_1d bellmanford(std::vector<std::vector<int>> graph, const int src, const int trg) {
     auto start = std::chrono::high_resolution_clock::now();
 
-    const long int vertex = graph[0][0];
-    const long int edges = graph[0][1];
+    const int vertex = graph[0][0];
+    const int edges = graph[0][1];
 
     graph.erase(graph.begin());
 
-    std::vector<long int> distance(vertex);
-    std::vector<long int> nodes(vertex);
-    std::vector<long int> prev(vertex);
-    long int iterations = 0;
+    std::vector<int> distance(vertex);
+    std::vector<int> nodes(vertex);
+    std::vector<int> prev(vertex);
+    int iterations = 0;
 
     for (int i = 0; i < vertex; i++) {
         distance[i] = INT_MAX;
@@ -53,5 +53,6 @@ t_distance_1d bellmanford(std::vector<std::vector<long int>> graph, const int sr
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
-    return {.distance = distance, .prev = prev, .path = get_path(prev, src, trg), .cost = distance[trg], .ms = duration, .iterations = iterations};
+    return {.distance = distance, .prev = prev, .path = get_path(prev, src,
+                                                                 trg), .cost = distance[trg], .ms = duration, .iterations = iterations};
 }

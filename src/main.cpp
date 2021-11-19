@@ -30,7 +30,11 @@ void print_result_2d(const std::string &algorithm, const t_distance_2d &result) 
 }
 
 int main() {
-    std::string file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rome99c.txt)";
+    std::string file_path;
+
+    std::cout << R"(Digite o caminho absoluto para o arquivo com o dataset: (exemplo: C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rg300_4730.txt))" << std::endl;
+
+    std::cin >> file_path;
 
     std::ifstream dataset(file_path);
 
@@ -38,24 +42,47 @@ int main() {
         throw std::invalid_argument("file path");
     }
 
-    std::vector<long int> vertices_and_edges_vector = get_vertices_and_edges(dataset);
-    std::vector<std::vector<long int>> graph = get_adjacency_list_graph(dataset);
+    std::vector<std::vector<int>> graph = get_graph(dataset);
 
     const int src = 0;
     const int trg = 100;
 
     std::cout << file_path << std::endl;
 
-    t_distance_1d result_d = dijkstra(graph, src, trg);
-    print_result_1d("Dijkstra", result_d);
+    std::cout << "1. Dijkstra" << std::endl;
+    std::cout << "2. Bellman-Ford" << std::endl;
+    std::cout << "3. Floyd-Warshall" << std::endl;
 
-    t_distance_1d result_b = bellmanford(graph, src, trg);
-    print_result_1d("Bellman-Ford", result_b);
+    int option;
+    std::cin >> option;
 
-//    t_distance_2d result_f = floyd_warshall(graph, src, trg);
-//    print_result_2d("Floyd-Warshall", result_f);
+    switch (option) {
+        case 1: {
+            system("cls");
+            t_distance_1d result_d = dijkstra(graph, src, trg);
+            print_result_1d("Dijkstra", result_d);
+            break;
+        }
+        case 2: {
+            system("cls");
+            t_distance_1d result_b = bellmanford(graph, src, trg);
+            print_result_1d("Bellman-Ford", result_b);
+            break;
+        }
+        case 3: {
+            system("cls");
+            t_distance_2d result_f = floyd_warshall(graph, src, trg);
+            print_result_2d("Floyd-Warshall", result_f);
+            break;
+        }
+        default: {
+            system("cls");
+            throw std::invalid_argument("option");
+        }
+    }
 
     dataset.close();
+    std::getchar();
 
     return 0;
 }

@@ -12,6 +12,6 @@
 #include <queue>
 #include "../fgraph/fgraph.h"
 
-t_distance_1d dijkstra(std::vector<std::vector<long int>>, int, int);
+t_distance_1d dijkstra(std::vector<std::vector<int>>, int, int);
 
 #endif //GRAFOS_DIJKSTRA_H
