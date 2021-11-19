@@ -32,9 +32,34 @@ void print_result_2d(const std::string &algorithm, const t_distance_2d &result) 
 int main() {
     std::string file_path;
 
-    std::cout << R"(Digite o caminho absoluto para o arquivo com o dataset: (exemplo: C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rg300_4730.txt))" << std::endl;
+    std::cout << "Escolha o arquivo: " << std::endl;
+    std::cout << "1. toy.txt" << std::endl;
+    std::cout << "2. rg300_4730.txt" << std::endl;
+    std::cout << "3. rome99c.txt" << std::endl;
+    std::cout << "4. facebook_combined.txt" << std::endl;
+    std::cout << "5. USA-road-dt.DC.txt" << std::endl;
 
-    std::cin >> file_path;
+    int file;
+    std::cin >> file;
+
+    switch (file) {
+        case 1:
+            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\toy.txt)";
+            break;
+        case 2:
+            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rg300_4730.txt)";
+            break;
+        case 3:
+            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rome99c.txt)";
+            break;
+        case 4:
+            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\facebook_combined.txt)";
+            break;
+        case 5:
+            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\USA-road-dt.DC.txt)";
+            break;
+        default: throw std::invalid_argument("file");
+    }
 
     std::ifstream dataset(file_path);
 
@@ -82,6 +107,7 @@ int main() {
     }
 
     dataset.close();
+    std::fflush(stdin);
     std::getchar();
 
     return 0;
