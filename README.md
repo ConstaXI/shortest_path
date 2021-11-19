@@ -3,4 +3,4 @@ Código feito com o intuito de implementar 3 algorítmos para procurar caminhos 
 
 ✅ Dijkstra
 ✅ Bellman-Ford
-❌ Floyd-Warshall
+✅ Floyd-Warshall
