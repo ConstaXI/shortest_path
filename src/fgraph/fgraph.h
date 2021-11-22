@@ -11,23 +11,12 @@
 #include <sstream>
 #include <chrono>
 
-typedef struct minimum_distance_1d {
-    std::vector<int> distance;
-    std::vector<int> prev;
+typedef struct minimum_distance {
     std::vector<int> path;
     int cost;
     std::chrono::milliseconds ms;
     int iterations;
-} t_distance_1d;
-
-typedef struct minimum_distance_2d {
-    std::vector<std::vector<int>> distance;
-    std::vector<std::vector<int>> next;
-    std::vector<int> path;
-    int cost;
-    std::chrono::milliseconds ms;
-    int iterations;
-} t_distance_2d;
+} t_distance;
 
 /* Get the adjacency list of a graph in a .txt file
  *

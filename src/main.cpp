@@ -7,19 +7,7 @@
 #include "bellman_ford/bellman_ford.h"
 #include "floyd_warshall/floyd_warshall.h"
 
-void print_result_1d(const std::string &algorithm, const t_distance_1d &result) {
-    std::cout << algorithm << std::endl;
-    std::cout << "Time: " << result.ms.count() << "ms" << std::endl;
-    std::cout << "Path: ";
-    for (const auto &i : result.path) {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "Cost: " << result.cost << std::endl;
-    std::cout << "Iterations: " << result.iterations << std::endl << std::endl;
-}
-
-void print_result_2d(const std::string &algorithm, const t_distance_2d &result) {
+void print_result(const std::string &algorithm, const t_distance &result) {
     std::cout << algorithm << std::endl;
     std::cout << "Time: " << result.ms.count() << "ms" << std::endl;
     std::cout << "Path: ";
@@ -91,20 +79,20 @@ int main() {
     switch (option) {
         case 1: {
             system("cls");
-            t_distance_1d result_d = dijkstra(graph, src, trg);
-            print_result_1d("Dijkstra", result_d);
+            t_distance result_d = dijkstra(graph, src, trg);
+            print_result("Dijkstra", result_d);
             break;
         }
         case 2: {
             system("cls");
-            t_distance_1d result_b = bellmanford(graph, src, trg);
-            print_result_1d("Bellman-Ford", result_b);
+            t_distance result_b = bellmanford(graph, src, trg);
+            print_result("Bellman-Ford", result_b);
             break;
         }
         case 3: {
             system("cls");
-            t_distance_2d result_f = floyd_warshall(graph, src, trg);
-            print_result_2d("Floyd-Warshall", result_f);
+            t_distance result_f = floyd_warshall(graph, src, trg);
+            print_result("Floyd-Warshall", result_f);
             break;
         }
         default: {
@@ -115,7 +103,7 @@ int main() {
 
     dataset.close();
     std::fflush(stdin);
-    std::getchar();
+    std::system("pause");
 
     return 0;
 }

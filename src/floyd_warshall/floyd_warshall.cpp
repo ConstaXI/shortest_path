@@ -17,7 +17,7 @@ std::vector<int> get_path(std::vector<std::vector<int>> next, int src, int trg) 
     return path;
 }
 
-t_distance_2d floyd_warshall(std::vector<std::vector<int>> graph, const int src, const int trg) {
+t_distance floyd_warshall(std::vector<std::vector<int>> graph, const int src, const int trg) {
     auto start = std::chrono::high_resolution_clock::now();
 
     const int vertex = graph[0][0];
@@ -59,5 +59,5 @@ t_distance_2d floyd_warshall(std::vector<std::vector<int>> graph, const int src,
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
-    return {.distance = distance, .next = next, .path = path, .cost = distance[src][trg], .ms = duration, .iterations = iterations};
+    return {.path = path, .cost = distance[src][trg], .ms = duration, .iterations = iterations};
 }

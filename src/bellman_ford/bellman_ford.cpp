@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "bellman_ford.h"
 
-t_distance_1d bellmanford(std::vector<std::vector<int>> graph, const int src, const int trg) {
+t_distance bellmanford(std::vector<std::vector<int>> graph, const int src, const int trg) {
     auto start = std::chrono::high_resolution_clock::now();
 
     const int vertex = graph[0][0];
@@ -53,6 +53,5 @@ t_distance_1d bellmanford(std::vector<std::vector<int>> graph, const int src, co
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
-    return {.distance = distance, .prev = prev, .path = get_path(prev, src,
-                                                                 trg), .cost = distance[trg], .ms = duration, .iterations = iterations};
+    return {.path = get_path(prev, src, trg), .cost = distance[trg], .ms = duration, .iterations = iterations};
 }
