@@ -1,4 +1,6 @@
 #include <stdexcept>
+#include <filesystem>
+#include <clocale>
 
 #include "fgraph/fgraph.h"
 #include "dijkstra/dijkstra.h"
@@ -30,6 +32,7 @@ void print_result_2d(const std::string &algorithm, const t_distance_2d &result) 
 }
 
 int main() {
+    std::setlocale(LC_ALL, "pt-br");
     std::string file_path;
 
     std::cout << "Escolha o arquivo: " << std::endl;
@@ -44,21 +47,22 @@ int main() {
 
     switch (file) {
         case 1:
-            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\toy.txt)";
+            file_path = "../src/datasets/toy.txt";
             break;
         case 2:
-            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rg300_4730.txt)";
+            file_path = "../src/datasets/rg300_4730.txt";
             break;
         case 3:
-            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\rome99c.txt)";
+            file_path = "../src/datasets/rome99c.txt";
             break;
         case 4:
-            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\facebook_combined.txt)";
+            file_path = "../src/datasets/facebook_combined.txt";
             break;
         case 5:
-            file_path = R"(C:\Users\DaviB\OneDrive\Desktop\shortest_path\src\datasets\USA-road-dt.DC.txt)";
+            file_path = "../src/datasets/USA-road-dt.DC.txt";
             break;
-        default: throw std::invalid_argument("file");
+        default:
+            throw std::invalid_argument("file");
     }
 
     std::ifstream dataset(file_path);
@@ -69,10 +73,13 @@ int main() {
 
     std::vector<std::vector<int>> graph = get_graph(dataset);
 
-    const int src = 0;
-    const int trg = 100;
+    std::cout << "Digite o vértice de origem." << std::endl;
+    int src;
+    std::cin >> src;
 
-    std::cout << file_path << std::endl;
+    std::cout << "Digite o vértice de destino." << std::endl;
+    int trg;
+    std::cin >> trg;
 
     std::cout << "1. Dijkstra" << std::endl;
     std::cout << "2. Bellman-Ford" << std::endl;
